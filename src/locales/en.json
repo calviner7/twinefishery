@@ -1,0 +1,12 @@
+{
+  "common": {
+    "actions": {
+      "ok": "OK"
+    },
+    "fields": {},
+    "sheets": {},
+    "terms": {
+      "welcomeTo": "Welcome to"
+    }
+  }
+}
