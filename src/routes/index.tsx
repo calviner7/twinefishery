@@ -337,12 +337,48 @@ export default function HomePage() {
             </div>
             <div>
               <h5 className="font-bold text-lg mb-2">Contact</h5>
-              <p>Email: hello@twinefishery.com</p>
-              <p>Phone: +62 812 3456 7890</p>
+              <p>Email: contact@twinefishery.com</p>
+              <p>Phone: +62 819-5299-1672</p>
             </div>
             <div>
               <h5 className="font-bold text-lg mb-2">Follow Us</h5>
-              <p>Instagram / Facebook / LinkedIn</p>
+              <div className="flex flex-row gap-x-4">
+                <img
+                  alt="ig"
+                  width={20}
+                  height={20}
+                  className="hover:cursor-pointer"
+                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/instagram_h6xtd6.png"
+                ></img>
+                <img
+                  alt="tiktok"
+                  width={20}
+                  height={20}
+                  className="hover:cursor-pointer"
+                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424265/tik-tok_eldpyt.png"
+                ></img>
+                <img
+                  alt="fb"
+                  width={20}
+                  height={20}
+                  className="hover:cursor-pointer"
+                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/facebook_ckcdn8.png"
+                ></img>
+                <img
+                  alt="yt"
+                  width={20}
+                  height={20}
+                  className="hover:cursor-pointer"
+                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424771/youtube_dhkmqd.png"
+                ></img>
+                <img
+                  alt="fb"
+                  width={20}
+                  height={20}
+                  className="hover:cursor-pointer"
+                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/facebook_ckcdn8.png"
+                ></img>
+              </div>
             </div>
           </div>
           <div className="text-center mt-6 text-gray-400 text-xs">
