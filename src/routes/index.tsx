@@ -2,10 +2,51 @@ import React, { useState } from "react";
 import { Switch } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import emailjs from "@emailjs/browser";
 
 export default function HomePage() {
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+  const [formData, setFormData] = useState<any>({
+    title: "Inquiry",
+    phoneNumber: "",
+    from: "",
+    email: "",
+    time: new Date(),
+    message: "",
+  });
+  const [sent, setSent] = useState(false);
+
+  const handleChange = (e: any) => {
+    setFormData((prev: any) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    emailjs
+      .send(
+        "service_7zuslho",
+        "template_b625uy8",
+        formData,
+        "ToY7aj9Xn-biIoZAa"
+      )
+      .then(() => {
+        setSent(true);
+        setFormData({
+          title: "",
+          phoneNumber: "",
+          from: "",
+          email: "",
+          time: "",
+          message: "",
+        });
+        setTimeout(() => setSent(false), 4000);
+      })
+      .catch((error: any) => {
+        console.error("Email sending failed:", error);
+      });
+  };
 
   return (
     <div
@@ -64,7 +105,7 @@ export default function HomePage() {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              Delivering premium quality seafood from Indonesia’s pristine
+              Delivering premium quality seafood from Indonesia's pristine
               waters directly to your market.
             </motion.p>
             <motion.button
@@ -94,7 +135,7 @@ export default function HomePage() {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            At TwineFishery, we connect Indonesia’s top-quality fisheries with
+            At TwineFishery, we connect Indonesia's top-quality fisheries with
             global seafood lovers, focusing on sustainability and traceability
             in every shipment.
           </motion.p>
@@ -141,21 +182,30 @@ export default function HomePage() {
           </p>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
-              { img: "/images/groupers.jpg", name: "Live Groupers" },
-              { img: "/images/fillets.jpg", name: "Fish Fillets" },
-              { img: "/images/frozen.jpg", name: "Frozen Seafood" },
+              {
+                img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/live_sjpf9b.jpg",
+                name: "Live Groupers",
+              },
+              {
+                img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/fillets_x2b0tf.jpg",
+                name: "Fish Fillets",
+              },
+              {
+                img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/frozen_um4en3.jpg",
+                name: "Frozen Seafood",
+              },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                className="bg-gray-100 dark:bg-gray-700 p-4 rounded shadow"
+                className="bg-gray-100 dark:bg-gray-700 rounded shadow"
                 whileHover={{ scale: 1.02 }}
               >
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-48 object-cover rounded mb-4"
+                  className="w-full h-48 object-cover rounded"
                 />
-                <h4 className="text-xl font-semibold">{item.name}</h4>
+                <h4 className="text-xl font-semibold py-4">{item.name}</h4>
               </motion.div>
             ))}
           </div>
@@ -168,28 +218,68 @@ export default function HomePage() {
             Join hands with us and discover a seamless export process, with full
             quality control and timely shipments to your destination.
           </p>
-          <button className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-md">
-            Contact Us
-          </button>
         </section>
 
-        {/* Newsletter Section */}
-        <section className="py-12 bg-blue-900 text-white text-center px-6">
-          <h4 className="text-2xl font-bold mb-2">SIGN UP TO OUR NEWSLETTER</h4>
+        {/* Contact Us Section */}
+        <section className="py-20 px-6 bg-blue-900 text-white text-center">
+          <h4 className="text-2xl font-bold mb-2">CONTACT US</h4>
           <p className="mb-6">
-            Get the latest news on our seafood offerings and global shipping
-            updates.
+            We'd love to hear from you. Reach out for inquiries, partnerships,
+            or anything else. We'll be sure to reach out to you soon!
           </p>
-          <div className="flex flex-col md:flex-row justify-center gap-4 max-w-2xl mx-auto">
+
+          <form
+            onSubmit={sendEmail}
+            className="max-w-2xl mx-auto grid gap-4 text-left"
+          >
             <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 rounded-md text-gray-900"
+              type="text"
+              name="from"
+              placeholder="Your Company"
+              value={formData.from}
+              onChange={handleChange}
+              required
+              className="px-4 py-2 rounded text-gray-900 w-full"
             />
-            <button className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-md font-semibold">
-              Subscribe
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="px-4 py-2 rounded text-gray-900 w-full"
+              />
+              <input
+                type="text"
+                name="phoneNumber"
+                placeholder="Your Phone Number (e.g +65)"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                required
+                className="px-4 py-2 rounded text-gray-900 w-full"
+              />
+            </div>
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows={5}
+              value={formData.message}
+              onChange={handleChange}
+              required
+              className="px-4 py-2 rounded text-gray-900"
+            />
+            <button
+              type="submit"
+              className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-md font-semibold"
+            >
+              Send Message
             </button>
-          </div>
+            {sent && (
+              <p className="text-green-300 mt-2">Message sent successfully!</p>
+            )}
+          </form>
         </section>
 
         {/* Footer */}
