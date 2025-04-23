@@ -90,32 +90,47 @@ export default function HomePage() {
           className="relative bg-cover bg-center h-screen"
           style={{ backgroundImage: "url('/images/hero.jpg')" }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white text-center px-4">
-            <motion.h1
-              className="text-4xl md:text-6xl font-bold mb-4"
-              initial={{ y: -20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              FRESH FROM INDONESIA TO THE WORLD
-            </motion.h1>
-            <motion.p
-              className="mb-6 text-lg md:text-xl max-w-2xl"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              Delivering premium quality seafood from Indonesia's pristine
-              waters directly to your market.
-            </motion.p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold"
-              onClick={() => navigate("/products")}
-            >
-              Explore Products
-            </motion.button>
+          <div className="relative w-full h-screen">
+            {/* Background Image */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{
+                backgroundImage:
+                  "url('https://res.cloudinary.com/do4q8ygop/image/upload/v1745398230/karamba_u4byns.jpg')",
+              }}
+            />
+
+            {/* Black Overlay with 30% opacity */}
+            <div className="absolute inset-0 bg-black bg-opacity-30" />
+
+            {/* Content */}
+            <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
+              <motion.h1
+                className="text-4xl md:text-6xl font-bold mb-4"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                FRESH FROM INDONESIA TO THE WORLD
+              </motion.h1>
+              <motion.p
+                className="mb-6 text-lg md:text-xl max-w-2xl"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                Delivering premium quality seafood from Indonesia's pristine
+                waters directly to your market.
+              </motion.p>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold"
+                onClick={() => navigate("/products")}
+              >
+                Explore Products
+              </motion.button>
+            </div>
           </div>
         </motion.section>
 
@@ -150,7 +165,7 @@ export default function HomePage() {
         {/* Our Story */}
         <section className="grid md:grid-cols-2 items-center py-20 px-6 bg-gray-50 dark:bg-gray-900">
           <img
-            src="/images/story.jpg"
+            src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745398123/fishfarmer_gf8ibu.jpg"
             alt="Our Story"
             className="w-full h-auto rounded"
           />
