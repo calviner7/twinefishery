@@ -54,11 +54,11 @@ export default function HomePage() {
         darkMode ? "dark" : ""
       } transition-colors duration-500 ease-in-out`}
     >
-      <div className="font-sans text-gray-800 dark:text-gray-100 dark:bg-gray-900">
+      <div className="font-sans text-gray-800 dark:text-gray-100 dark:bg-gray-900 relative">
         {/* Header with Dark Mode Toggle */}
-        <header className="flex justify-between items-center px-6 py-4 border-b dark:border-gray-700 bg-white dark:bg-gray-800">
+        <header className="flex justify-between items-center px-6 py-4 absolute z-50 w-full">
           <h1
-            className="text-xl font-bold text-blue-600 dark:text-blue-400 cursor-pointer"
+            className="text-xl font-bold text-white cursor-pointer"
             onClick={() => navigate("/")}
           >
             TwineFishery
