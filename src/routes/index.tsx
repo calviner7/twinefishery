@@ -123,9 +123,13 @@ export default function HomePage() {
                 waters directly to your market.
               </motion.p>
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{
+                  scale: 1.02,
+                  backgroundColor: "white",
+                  color: "black",
+                }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold"
+                className=" text-white px-6 py-2 border-2 border-white font-semibold"
                 onClick={() => navigate("/products")}
               >
                 Explore Products
@@ -155,19 +159,19 @@ export default function HomePage() {
             in every shipment.
           </motion.p>
           <motion.button
-            whileHover={{ scale: 1.05 }}
-            className="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-md"
+            whileHover={{ scale: 1.02 }}
+            className="mt-6 border-2 border-black hover:bg-blue-600 hover:text-white hover:border-transparent px-6 py-2 font-semibold"
           >
             Learn More
           </motion.button>
         </section>
 
         {/* Our Story */}
-        <section className="grid md:grid-cols-2 items-center py-20 px-6 bg-gray-50 dark:bg-gray-900">
+        <section className="grid md:grid-cols-2 items-center bg-gray-50 dark:bg-gray-900">
           <img
             src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745398123/fishfarmer_gf8ibu.jpg"
             alt="Our Story"
-            className="w-full h-auto rounded"
+            className="w-full h-auto"
           />
           <motion.div
             className="p-6"
@@ -182,7 +186,7 @@ export default function HomePage() {
               work directly with coastal communities to ensure fair trade and
               top quality.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">
+            <button className="mt-6 border-2 border-black hover:bg-blue-600 hover:text-white hover:border-transparent px-6 py-2 font-semibold">
               Read More
             </button>
           </motion.div>
@@ -212,13 +216,13 @@ export default function HomePage() {
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                className="bg-gray-100 dark:bg-gray-700 rounded shadow"
+                className="bg-gray-100 dark:bg-gray-700 shadow"
                 whileHover={{ scale: 1.02 }}
               >
                 <img
                   src={item.img}
                   alt={item.name}
-                  className="w-full h-48 object-cover rounded"
+                  className="w-full h-48 object-cover"
                 />
                 <h4 className="text-xl font-semibold py-4">{item.name}</h4>
               </motion.div>
@@ -254,7 +258,7 @@ export default function HomePage() {
               value={formData.from}
               onChange={handleChange}
               required
-              className="px-4 py-2 rounded text-gray-900 w-full"
+              className="px-4 py-2 text-gray-900 w-full"
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <input
@@ -264,7 +268,7 @@ export default function HomePage() {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="px-4 py-2 rounded text-gray-900 w-full"
+                className="px-4 py-2 text-gray-900 w-full"
               />
               <input
                 type="text"
@@ -273,7 +277,7 @@ export default function HomePage() {
                 value={formData.phoneNumber}
                 onChange={handleChange}
                 required
-                className="px-4 py-2 rounded text-gray-900 w-full"
+                className="px-4 py-2 text-gray-900 w-full"
               />
             </div>
             <textarea
@@ -283,16 +287,18 @@ export default function HomePage() {
               value={formData.message}
               onChange={handleChange}
               required
-              className="px-4 py-2 rounded text-gray-900"
+              className="px-4 py-2 text-gray-900"
             />
             <button
               type="submit"
-              className="bg-orange-500 hover:bg-orange-600 px-6 py-2 rounded-md font-semibold"
+              className="bg-orange-500 hover:bg-orange-600 px-6 py-2 font-semibold"
             >
               Send Message
             </button>
             {sent && (
-              <p className="text-green-300 mt-2">Message sent successfully!</p>
+              <p className="bg-green-500 text-white mt-2 px-1 py-2 max-w-60 text-center text-sm">
+                Message sent successfully!
+              </p>
             )}
           </form>
         </section>
