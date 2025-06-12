@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { Switch } from "@headlessui/react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { usePageTransition } from "context/TransitionContext";
 import emailjs from "@emailjs/browser";
 
 export default function HomePage() {
   const [darkMode, setDarkMode] = useState(false);
-  const navigate = useNavigate();
+  const { startPageTransition } = usePageTransition();
   const [formData, setFormData] = useState<any>({
     title: "Inquiry",
     phoneNumber: "",
@@ -16,9 +16,33 @@ export default function HomePage() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const productsRef = useRef<HTMLDivElement | null>(null);
+
+  const handleNavigate = (pathname: string) => {
+    startPageTransition(pathname, <div className="w-full h-full bg-black" />);
+  };
 
   const handleChange = (e: any) => {
     setFormData((prev: any) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const downloadCatalogue = () => {
+    fetch("https://ipapi.co/json/")
+      .then((res) => res.json())
+      .then((data) => {
+        const isIndonesia = data.country_code === "ID";
+        const link = document.createElement("a");
+        link.href = isIndonesia
+          ? "/catalogue/local.pdf"
+          : "/catalogue/international.pdf";
+        link.download = isIndonesia ? "local.pdf" : "international.pdf";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      })
+      .catch((err) => {
+        console.error("Location check failed:", err);
+      });
   };
 
   const sendEmail = (e: any) => {
@@ -48,6 +72,10 @@ export default function HomePage() {
       });
   };
 
+  const handleExploreClick = () => {
+    productsRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <div
       className={`${
@@ -59,7 +87,7 @@ export default function HomePage() {
         <header className="flex justify-between items-center px-6 py-4 absolute z-50 w-full">
           <h1
             className="text-xl font-bold text-white cursor-pointer"
-            onClick={() => navigate("/")}
+            onClick={() => handleNavigate("/")}
           >
             TwineFishery
           </h1>
@@ -91,7 +119,6 @@ export default function HomePage() {
           style={{ backgroundImage: "url('/images/hero.jpg')" }}
         >
           <div className="relative w-full h-screen">
-            {/* Background Image */}
             <div
               className="absolute inset-0 bg-cover bg-center"
               style={{
@@ -99,11 +126,7 @@ export default function HomePage() {
                   "url('https://res.cloudinary.com/do4q8ygop/image/upload/v1745398230/karamba_u4byns.jpg')",
               }}
             />
-
-            {/* Black Overlay with 30% opacity */}
             <div className="absolute inset-0 bg-black bg-opacity-30" />
-
-            {/* Content */}
             <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
               <motion.h1
                 className="text-4xl md:text-6xl font-bold mb-4"
@@ -130,7 +153,7 @@ export default function HomePage() {
                 }}
                 whileTap={{ scale: 0.95 }}
                 className=" text-white px-6 py-2 border-2 border-white font-semibold"
-                onClick={() => navigate("/products")}
+                onClick={handleExploreClick}
               >
                 Explore Products
               </motion.button>
@@ -139,7 +162,15 @@ export default function HomePage() {
         </motion.section>
 
         {/* About Section */}
-        <section className="py-20 px-6 bg-white dark:bg-gray-800 text-center">
+        <section className="py-20 px-6 bg-gray-50 dark:bg-gray-900 text-center">
+          <div className="flex justify-center items-center my-4">
+            <img
+              alt="fresh&sustainable"
+              src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745578464/plant_vkjzej.png"
+              height={42}
+              width={42}
+            />
+          </div>
           <motion.h2
             className="text-3xl font-bold mb-4"
             initial={{ opacity: 0 }}
@@ -160,40 +191,18 @@ export default function HomePage() {
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.02 }}
-            className="mt-6 border-2 border-black hover:bg-blue-600 hover:text-white hover:border-transparent px-6 py-2 font-semibold"
+            className="mt-6 border-2 border-black dark:border-white hover:bg-blue-600 hover:text-white hover:border-transparent px-6 py-2 font-semibold"
+            onClick={downloadCatalogue}
           >
-            Learn More
+            Download Catalogue
           </motion.button>
         </section>
 
-        {/* Our Story */}
-        <section className="grid md:grid-cols-2 items-center bg-gray-50 dark:bg-gray-900">
-          <img
-            src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745398123/fishfarmer_gf8ibu.jpg"
-            alt="Our Story"
-            className="w-full h-auto"
-          />
-          <motion.div
-            className="p-6"
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h3 className="text-2xl font-bold mb-4">OUR STORY</h3>
-            <p className="text-lg mb-4">
-              Born out of passion for seafood and innovation, TwineFishery aims
-              to revolutionize how fresh seafood is sourced and delivered. We
-              work directly with coastal communities to ensure fair trade and
-              top quality.
-            </p>
-            <button className="mt-6 border-2 border-black hover:bg-blue-600 hover:text-white hover:border-transparent px-6 py-2 font-semibold">
-              Read More
-            </button>
-          </motion.div>
-        </section>
-
         {/* Product Section */}
-        <section className="py-20 px-6 text-center bg-white dark:bg-gray-800">
+        <section
+          ref={productsRef}
+          className="py-20 px-6 text-center bg-white dark:bg-gray-800"
+        >
           <h3 className="text-3xl font-bold mb-4">OUR PRODUCTS</h3>
           <p className="max-w-2xl mx-auto text-lg mb-8">
             From live groupers to processed seafood, we offer a wide variety of
@@ -202,21 +211,21 @@ export default function HomePage() {
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
               {
-                img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/live_sjpf9b.jpg",
-                name: "Live Groupers",
+                img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1749730104/live_iq0ncy.jpg",
+                name: "Live",
               },
               {
                 img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/fillets_x2b0tf.jpg",
-                name: "Fish Fillets",
+                name: "Frozen Filleted",
               },
               {
                 img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/frozen_um4en3.jpg",
-                name: "Frozen Seafood",
+                name: "Frozen Whole",
               },
             ].map((item, idx) => (
               <motion.div
                 key={idx}
-                className="bg-gray-100 dark:bg-gray-700 shadow"
+                className="bg-gray-100 dark:bg-gray-700 shadow hover:cursor-pointer"
                 whileHover={{ scale: 1.02 }}
               >
                 <img
@@ -232,6 +241,18 @@ export default function HomePage() {
 
         {/* Experience Section */}
         <section className="py-20 px-6 bg-gray-50 dark:bg-gray-900 text-center">
+          <div className="flex justify-center items-center my-3">
+            <img
+              alt="fresh&sustainable"
+              src={
+                darkMode
+                  ? "https://res.cloudinary.com/do4q8ygop/image/upload/v1745587048/hand-shakedark_jjjiur.png"
+                  : "https://res.cloudinary.com/do4q8ygop/image/upload/v1745587048/hand-shakelight_hcxdc5.png"
+              }
+              height={58}
+              width={58}
+            ></img>
+          </div>
           <h3 className="text-3xl font-bold mb-4">PARTNERING FOR EXCELLENCE</h3>
           <p className="max-w-2xl mx-auto text-lg mb-6">
             Join hands with us and discover a seamless export process, with full
