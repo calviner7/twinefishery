@@ -1,42 +1,50 @@
-import React from "react"
-import ReactDOM from "react-dom/client"
-import "./index.css"
-import reportWebVitals from "./reportWebVitals"
-import "./locales/i18n"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Root from "@routes/index"
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import "./locales/i18n";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Home from "../src/routes/Home";
+import Products from "../src/routes/Products";
+import RootLayout from "layouts/RootLayout";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: <RootLayout />, // 🔥 Use RootLayout here
     errorElement: <div>Error !</div>,
+    children: [
+      {
+        index: true, // means "/"
+        element: <Home />,
+      },
+      // {
+      //   path: "products",
+      //   element: <Products />,
+      // },
+      // {
+      //   path: "login",
+      //   element: <div>Login</div>,
+      // },
+      // {
+      //   path: "login/:loginId",
+      //   element: <div>Login with ID</div>,
+      // },
+    ],
   },
-  {
-    path: "/sign-up",
-    element: <div>sign up</div>,
-    errorElement: <div>Error !</div>,
-  },
-  {
-    path: "/login",
-    element: <div>login</div>,
-    errorElement: <div>Error!</div>,
-  },
-  {
-    path: "/login/:loginId",
-    element: <div>login with id</div>,
-    errorElement: <div>Error!</div>,
-  },
-])
+]);
 
-const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
-)
+);
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals()
+reportWebVitals();
