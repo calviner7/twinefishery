@@ -332,33 +332,17 @@ export default function HomePage() {
               <p>Exporting quality seafood from Indonesia to the world.</p>
             </div>
             <div>
-              <h5 className="font-bold text-lg mb-2">Navigation</h5>
+              <h5 className="font-bold text-lg mb-2">Content</h5>
               <ul>
-                <li>
-                  <a href="/" className="hover:underline">
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a href="/about" className="hover:underline">
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a href="/products" className="hover:underline">
-                    Products
-                  </a>
-                </li>
-                <li>
-                  <a href="/contact" className="hover:underline">
-                    Contact
-                  </a>
-                </li>
+                <li>Home</li>
+                <li>About</li>
+                <li>Products</li>
+                <li>Contact</li>
               </ul>
             </div>
             <div>
               <h5 className="font-bold text-lg mb-2">Contact</h5>
-              <p>Email: contact@twinefishery.com</p>
+              {/* <p>Email: contact@twinefishery.com</p> */}
               <p>Phone: +62 819-5299-1672</p>
             </div>
             <div>
@@ -371,34 +355,34 @@ export default function HomePage() {
                   className="hover:cursor-pointer"
                   src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/instagram_h6xtd6.png"
                 ></img>
-                <img
+                {/* <img
                   alt="tiktok"
                   width={20}
                   height={20}
                   className="hover:cursor-pointer"
                   src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424265/tik-tok_eldpyt.png"
-                ></img>
-                <img
+                ></img> */}
+                {/* <img
                   alt="fb"
                   width={20}
                   height={20}
                   className="hover:cursor-pointer"
                   src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/facebook_ckcdn8.png"
-                ></img>
-                <img
+                ></img> */}
+                {/* <img
                   alt="yt"
                   width={20}
                   height={20}
                   className="hover:cursor-pointer"
                   src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424771/youtube_dhkmqd.png"
-                ></img>
-                <img
+                ></img> */}
+                {/* <img
                   alt="fb"
                   width={20}
                   height={20}
                   className="hover:cursor-pointer"
                   src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/facebook_ckcdn8.png"
-                ></img>
+                ></img> */}
               </div>
             </div>
           </div>
