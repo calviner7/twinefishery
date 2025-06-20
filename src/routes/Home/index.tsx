@@ -186,8 +186,7 @@ export default function HomePage() {
             transition={{ delay: 0.2 }}
           >
             At TwineFishery, we connect Indonesia's top-quality fisheries with
-            global seafood lovers, focusing on sustainability and traceability
-            in every shipment.
+            global seafood lovers, focusing on sustainability.
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.02 }}
@@ -205,8 +204,8 @@ export default function HomePage() {
         >
           <h3 className="text-3xl font-bold mb-4">OUR PRODUCTS</h3>
           <p className="max-w-2xl mx-auto text-lg mb-8">
-            From live groupers to processed seafood, we offer a wide variety of
-            fish and marine goods tailored to meet the needs of global buyers.
+            From live groupers to processed fish, we offer variety goods to meet
+            your needs.
           </p>
           <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {[
@@ -255,8 +254,8 @@ export default function HomePage() {
           </div>
           <h3 className="text-3xl font-bold mb-4">PARTNERING FOR EXCELLENCE</h3>
           <p className="max-w-2xl mx-auto text-lg mb-6">
-            Join hands with us and discover a seamless export process, with full
-            quality control and timely shipments to your destination.
+            Join hands with us, with full quality control and timely shipments
+            to your destination.
           </p>
         </section>
 
