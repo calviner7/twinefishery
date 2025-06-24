@@ -3,6 +3,10 @@ import { Switch } from "@headlessui/react";
 import { motion } from "framer-motion";
 import { usePageTransition } from "context/TransitionContext";
 import emailjs from "@emailjs/browser";
+import LightLogo from "assets/logo/light.png";
+import DarkLogo from "assets/logo/dark.png";
+import SunIcon from "assets/icons/sun.png";
+import MoonIcon from "assets/icons/moon.png";
 
 export default function HomePage() {
   const [darkMode, setDarkMode] = useState(false);
@@ -17,6 +21,9 @@ export default function HomePage() {
   });
   const [sent, setSent] = useState(false);
   const productsRef = useRef<HTMLDivElement | null>(null);
+  const waLink =
+    "https://wa.me/6281952991672?text=Hello%20TwineFishery%2C%20I%27m%20interested%20in%20your%20fresh%20hybrid%20grouper%20supply.%20Could%20you%20share%20more%20details%20about%20availability%20and%20pricing%3F";
+  const igLink = "https://instagram.com/twinefishery";
 
   const handleNavigate = (pathname: string) => {
     startPageTransition(pathname, <div className="w-full h-full bg-black" />);
@@ -84,15 +91,15 @@ export default function HomePage() {
     >
       <div className="font-sans text-gray-800 dark:text-gray-100 dark:bg-gray-900 relative">
         {/* Header with Dark Mode Toggle */}
-        <header className="flex justify-between items-center px-6 py-4 absolute z-50 w-full">
-          <h1
-            className="text-xl font-bold text-white cursor-pointer"
+        <header className="flex justify-between items-center px-6 py-4 absolute z-50 w-full dark:bg-gray-900 bg-white">
+          <img
+            alt="logo"
+            src={darkMode ? DarkLogo : LightLogo}
+            width={140}
             onClick={() => handleNavigate("/")}
-          >
-            TwineFishery
-          </h1>
+          ></img>
           <div className="flex items-center space-x-2">
-            <span className="text-sm">☀️</span>
+            <img alt="light" src={SunIcon} width={18}></img>
             <Switch
               checked={darkMode}
               onChange={setDarkMode}
@@ -106,7 +113,7 @@ export default function HomePage() {
                 } inline-block h-4 w-4 transform rounded-full bg-white transition`}
               />
             </Switch>
-            <span className="text-sm">🌙</span>
+            <img alt="light" src={MoonIcon} width={16}></img>
           </div>
         </header>
 
@@ -123,7 +130,7 @@ export default function HomePage() {
               className="absolute inset-0 bg-cover bg-center"
               style={{
                 backgroundImage:
-                  "url('https://res.cloudinary.com/do4q8ygop/image/upload/v1745398230/karamba_u4byns.jpg')",
+                  "url('https://res.cloudinary.com/do4q8ygop/image/upload/v1750769561/Untitled_design_ji36eg.png')",
               }}
             />
             <div className="absolute inset-0 bg-black bg-opacity-30" />
@@ -152,7 +159,7 @@ export default function HomePage() {
                   color: "black",
                 }}
                 whileTap={{ scale: 0.95 }}
-                className=" text-white px-6 py-2 border-2 border-white font-semibold"
+                className="text-gray-900 px-6 py-2 rounded-lg font-semibold dark:bg-gray-900 bg-white dark:text-white"
                 onClick={handleExploreClick}
               >
                 Explore Products
@@ -162,7 +169,7 @@ export default function HomePage() {
         </motion.section>
 
         {/* About Section */}
-        <section className="py-20 px-6 bg-gray-50 dark:bg-gray-900 text-center">
+        <section className="py-20 px-6  dark:bg-gray-900 bg-gray-100 text-center">
           <div className="flex justify-center items-center my-4">
             <img
               alt="fresh&sustainable"
@@ -190,7 +197,7 @@ export default function HomePage() {
           </motion.p>
           <motion.button
             whileHover={{ scale: 1.02 }}
-            className="mt-6 border-2 border-black dark:border-white hover:bg-blue-600 hover:text-white hover:border-transparent px-6 py-2 font-semibold"
+            className="mt-6 dark:bg-white dark:text-gray-900 bg-gray-900 text-white px-6 py-2 font-semibold rounded-lg"
             onClick={downloadCatalogue}
           >
             Download Catalogue
@@ -207,34 +214,47 @@ export default function HomePage() {
             From live groupers to processed fish, we offer variety goods to meet
             your needs.
           </p>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto px-4">
             {[
               {
                 img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1749730104/live_iq0ncy.jpg",
-                name: "Live",
+                name: "Live 🔥",
               },
               {
                 img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/fillets_x2b0tf.jpg",
-                name: "Frozen Filleted",
+                name: "🐟 Processed",
               },
               {
                 img: "https://res.cloudinary.com/do4q8ygop/image/upload/v1745397449/frozen_um4en3.jpg",
-                name: "Frozen Whole",
+                name: "🧊 Frozen",
               },
-            ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="bg-gray-100 dark:bg-gray-700 shadow hover:cursor-pointer"
-                whileHover={{ scale: 1.02 }}
-              >
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="w-full h-48 object-cover"
-                />
-                <h4 className="text-xl font-semibold py-4">{item.name}</h4>
-              </motion.div>
-            ))}
+            ].map((item, idx) => {
+              const waLink = `https://wa.me/6281952991672?text=Hello%20TwineFishery%2C%20I'm%20interested%20in%20your%20${encodeURIComponent(
+                item.name
+              )}%20product.%20Could%20you%20share%20more%20details%3F`;
+
+              return (
+                <div key={idx} className="flex justify-center">
+                  <div className="relative w-80 rounded-tr-[60px] rounded-bl-[60px] overflow-hidden shadow-lg">
+                    <img
+                      src={item.img}
+                      alt={item.name}
+                      className="w-full h-auto object-cover"
+                    />
+                    <div className="absolute bottom-0 left-0 right-0 bg-gray-900 p-2 rounded-tl-[40px]">
+                      <h3 className="text-white text-lg font-semibold">
+                        {item.name}
+                      </h3>
+                      <a href={waLink} rel="noreferrer" target="_blank">
+                        <button className="mt-2 bg-yellow-400 text-black text-sm px-4 py-1 rounded-lg hover:bg-yellow-300 transition duration-200">
+                          Shop now →
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
 
@@ -325,12 +345,12 @@ export default function HomePage() {
 
         {/* Footer */}
         <footer className="bg-gray-900 text-white py-10 px-6">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-8 text-sm">
+          <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-sm">
             <div>
               <h5 className="font-bold text-lg mb-2">TwineFishery</h5>
               <p>Exporting quality seafood from Indonesia to the world.</p>
             </div>
-            <div>
+            {/* <div>
               <h5 className="font-bold text-lg mb-2">Content</h5>
               <ul>
                 <li>Home</li>
@@ -338,22 +358,33 @@ export default function HomePage() {
                 <li>Products</li>
                 <li>Contact</li>
               </ul>
-            </div>
+            </div> */}
             <div>
               <h5 className="font-bold text-lg mb-2">Contact</h5>
-              {/* <p>Email: contact@twinefishery.com</p> */}
+              <p>Email: twinefishery@gmail.com</p>
               <p>Phone: +62 819-5299-1672</p>
             </div>
             <div>
               <h5 className="font-bold text-lg mb-2">Follow Us</h5>
               <div className="flex flex-row gap-x-4">
-                <img
-                  alt="ig"
-                  width={20}
-                  height={20}
-                  className="hover:cursor-pointer"
-                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/instagram_h6xtd6.png"
-                ></img>
+                <a href={igLink} rel="noreferrer" target="_blank">
+                  <img
+                    alt="ig"
+                    width={20}
+                    height={20}
+                    className="hover:cursor-pointer"
+                    src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/instagram_h6xtd6.png"
+                  ></img>
+                </a>
+                <a href={waLink} rel="noreferrer" target="_blank">
+                  <img
+                    alt="wa"
+                    width={20}
+                    height={20}
+                    className="hover:cursor-pointer"
+                    src="https://res.cloudinary.com/do4q8ygop/image/upload/v1750771506/whatsapp_1_cy0kmb.png"
+                  ></img>
+                </a>
                 {/* <img
                   alt="tiktok"
                   width={20}
