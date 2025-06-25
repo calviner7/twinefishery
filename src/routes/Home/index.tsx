@@ -347,8 +347,8 @@ export default function HomePage() {
         <footer className="bg-gray-900 text-white py-10 px-6">
           <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8 text-sm">
             <div>
-              <h5 className="font-bold text-lg mb-2">TwineFishery</h5>
-              <p>Exporting quality seafood from Indonesia to the world.</p>
+              <h5 className="font-bold text-lßg mb-2">TwineFishery</h5>
+              <p>Providing quality seafood from Indonesia to the world.</p>
             </div>
             {/* <div>
               <h5 className="font-bold text-lg mb-2">Content</h5>
