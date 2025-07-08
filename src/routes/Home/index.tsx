@@ -24,6 +24,8 @@ export default function HomePage() {
   const waLink =
     "https://wa.me/6281952991672?text=Hello%20TwineFishery%2C%20I%27m%20interested%20in%20your%20fresh%20hybrid%20grouper%20supply.%20Could%20you%20share%20more%20details%20about%20availability%20and%20pricing%3F";
   const igLink = "https://instagram.com/twinefishery";
+  const linkedInLink = "https://linkedin.com/company/twine-fishery";
+  const threadsLink = "https://threads.com/@twinefishery";
 
   const handleNavigate = (pathname: string) => {
     startPageTransition(pathname, <div className="w-full h-full bg-black" />);
@@ -385,13 +387,24 @@ export default function HomePage() {
                     src="https://res.cloudinary.com/do4q8ygop/image/upload/v1750771506/whatsapp_1_cy0kmb.png"
                   ></img>
                 </a>
-                {/* <img
-                  alt="tiktok"
-                  width={20}
-                  height={20}
-                  className="hover:cursor-pointer"
-                  src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424265/tik-tok_eldpyt.png"
-                ></img> */}
+                <a href={threadsLink} rel="noreferrer" target="_blank">
+                  <img
+                    alt="threads"
+                    width={20}
+                    height={20}
+                    className="hover:cursor-pointer"
+                    src="https://res.cloudinary.com/do4q8ygop/image/upload/v1751957287/threads_wapyql.png"
+                  ></img>
+                </a>
+                <a href={linkedInLink} rel="noreferrer" target="_blank">
+                  <img
+                    alt="linkedin"
+                    width={20}
+                    height={20}
+                    className="hover:cursor-pointer"
+                    src="https://res.cloudinary.com/do4q8ygop/image/upload/v1745424428/linkedin_kq1inc.png"
+                  ></img>
+                </a>
                 {/* <img
                   alt="fb"
                   width={20}
