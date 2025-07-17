@@ -363,7 +363,7 @@ export default function HomePage() {
             </div> */}
             <div>
               <h5 className="font-bold text-lg mb-2">Contact</h5>
-              <p>Email: twinefishery@gmail.com</p>
+              <p>Email: contact@twinefishery.com</p>
               <p>Phone: +62 819-5299-1672</p>
             </div>
             <div>
